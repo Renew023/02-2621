@@ -9,4 +9,13 @@ public class Effect{
     {No = _No; Name = _Name; EffectExplain = _EffectExplain; DMG = _DMG; Turn = _Turn;}
     public string No, Name, EffectExplain;
     public int DMG, Turn;
+
+    public Effect(Effect effect)
+    {
+        No = effect.No; 
+        Name = effect.Name; 
+        EffectExplain = effect.EffectExplain; 
+        DMG = effect.DMG; 
+        Turn = effect.Turn;
+    }
 }
