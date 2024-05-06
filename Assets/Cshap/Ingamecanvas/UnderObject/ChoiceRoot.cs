@@ -24,10 +24,18 @@ public class ChoiceRoot : MonoBehaviour
         playerhp = GameObject.Find("InGamePlayerHP").GetComponent<PlayerHP>();
         monsterhp = GameObject.Find("InGameMonsterHP").GetComponent<MonsterHP>();
         //playerstat = GameObject.Find("InGamePlayerStatus").GetComponent<PlayerInfo>(); 
-        End = GameObject.Find("InGamecanvas").transform.GetChild(6).GetComponent<Ending>();
+        End = GameObject.Find("InGamecanvas").transform.GetChild(7).GetComponent<Ending>();
     }
 
     public void CheckMapline(){ //string _No, string _TileName, string _TileTitle, string _Explain, string _MapInfo, string _RewardType, int _Num
+        if(TextList.instance.result == 0)
+        {
+            TextList.instance.result = 1;
+            PlayerSettingData.instance.PlayerPin++;
+            return;
+        }
+        TextList.instance.check = choice;
+        
         switch(PlayerSettingData.instance.Mapline[PlayerSettingData.instance.PlayerPin].TileName){
             case "함정": 
             EventChoiceSelect();
@@ -72,7 +80,7 @@ public class ChoiceRoot : MonoBehaviour
 
     public void Attack(int num){
         for(int s=0; s<num; s++){
-            TextList.instance.Monster_HP -= PlayerSettingData.instance.PlayerSkill[choice].Damage * AttackSelect() / 100;
+            TextList.instance.Monster_HP -= PlayerSettingData.instance.PlayerSkill[choice].Damage * AttackSelect();
             
             for(int i=0; i < PlayerSettingData.instance.PlayerItem.Count; i++)
             {
@@ -119,6 +127,7 @@ public class ChoiceRoot : MonoBehaviour
 
 
     public void EventChoiceSelect(){
+        Debug.Log("클릭되었습니다.");
         //Debug.Log(mapgrid.Mapline[choice].TileTitle);
         
         TextBox = DataBase.instance.MapTileArrayYes.FindAll(x => x.No == PlayerSettingData.instance.Mapline[PlayerSettingData.instance.PlayerPin].No);
@@ -141,7 +150,7 @@ public class ChoiceRoot : MonoBehaviour
         }
         Debug.Log(TextBox[choice].RewardType + " : " + TextBox[choice].Num);
         RootEnd();
-        PlayerSettingData.instance.PlayerPin++;
+        TextList.instance.result = 0;
     }
 
     public void RootEnd(){
@@ -174,13 +183,15 @@ public class ChoiceRoot : MonoBehaviour
     public void SkillChange(){
         PlayerSettingData.instance.PlayerSkill[choice] = TextList.instance.SelectSkill;
         TextList.instance.MonsterState = "";
-        PlayerSettingData.instance.PlayerPin++;
+        TextList.instance.result = 0;
         TextList.instance.Ran_num.Clear();
         TextList.instance.RewardType.Clear();
         //TextList.instance.HitDamage = 0;
     }
 
     public void RewardSelect(){
+        TextList.instance.MidText.text = PlayerSettingData.instance.Mapline[PlayerSettingData.instance.PlayerPin].Explain;
+
         Ran_num = TextList.instance.Ran_num[choice];
         RewardType = TextList.instance.RewardType[choice];
         if(RewardType == "아이템")

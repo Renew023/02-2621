@@ -46,8 +46,6 @@ public class InitManager : MonoBehaviour
         MapSelectScreen = MaincanvasRespon.transform.GetChild(0).gameObject;
         BookScreen = MaincanvasRespon.transform.GetChild(1).gameObject;
         HeroSelectScreen = MaincanvasRespon.transform.GetChild(2).gameObject;
-        PassiveItemBookScreen = MaincanvasRespon.transform.GetChild(3).gameObject;
-        PassiveStatScreen = MaincanvasRespon.transform.GetChild(4).gameObject;
         
         ScreenOverPanel = BookScreen.transform.GetChild(0).gameObject;
         BookInScreen = BookScreen.transform.GetChild(1).gameObject;
@@ -57,7 +55,7 @@ public class InitManager : MonoBehaviour
 
         InGamecanvasRespon = ObjectKing.transform.GetChild(3).gameObject;
         //InGamecanvasRespon.transform.GetChild(0).gameObject;
-        InventoryScreen = InGamecanvasRespon.transform.GetChild(0).gameObject;
+        //InventoryScreen = InGamecanvasRespon.transform.GetChild(0).gameObject;
 
         Fixedcanvas = ObjectKing.transform.GetChild(4).gameObject;
 
@@ -101,20 +99,24 @@ public class InitManager : MonoBehaviour
         BookInScreen.SetActive(true); 
         NoGroupcanvas.SetActive(true); // 5번
         TouchLogin.SetActive(true);
+
+        //build
+        BookScreen.SetActive(true);
     }
 
     public void UnInit(){ //자식들
         HeroSelectScreen.SetActive(false);
+
+        //build off
         BookScreen.SetActive(false);
+
+        
         MapSelectScreen.SetActive(false);
-        BookScreen.SetActive(false);
         BookMoreInfoScreen.SetActive(false);
-        PassiveItemBookScreen.SetActive(false);
-        PassiveStatScreen.SetActive(false);
         //인게임
         InGamecanvas.SetActive(false); // 2번
         
-        InventoryScreen.SetActive(false);
+        //InventoryScreen.SetActive(false);
         
         
         //5. 오버레이

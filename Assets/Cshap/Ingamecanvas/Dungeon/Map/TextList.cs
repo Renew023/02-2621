@@ -30,11 +30,14 @@ public class TextList : MonoBehaviour
 
     public Skill SelectSkill;
     public List<string> RewardType;
+    public int result;
+    public int check;
 
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+        result = 1;
         mapgrid = GameObject.Find("MapGrid1").GetComponent<MapGrid>();
         monsterhp = GameObject.Find("InGameMonsterHP").GetComponent<MonsterHP>();
         init();
@@ -75,6 +78,16 @@ public class TextList : MonoBehaviour
     }
 
     public void CheckMapline(){ //string _No, string _TileName, string _TileTitle, string _Explain, string _MapInfo, string _RewardType, int _Num
+        
+        if(result == 0)
+        {
+            ChoiceButton[0].SetActive(true);
+            ChoiceButtonText[0].text = "완료";
+            TextBox = DataBase.instance.MapTileArrayYes.FindAll(x => x.No == PlayerSettingData.instance.Mapline[PlayerSettingData.instance.PlayerPin].No);
+            MidText.text = TextBox[check].Explain;
+            return;
+        }
+        
         switch(PlayerSettingData.instance.Mapline[PlayerSettingData.instance.PlayerPin].TileName){
             case "함정": 
                 Trap();
@@ -138,6 +151,14 @@ public class TextList : MonoBehaviour
 
     void Boss(){ //1번
 
+    }
+    void Event()
+    {
+        ShowText();
+    }
+
+    void MapTileYes(){
+        MidText.text = DataBase.instance.MapTileArrayYes.Find(x => x.No == PlayerSettingData.instance.Mapline[PlayerSettingData.instance.PlayerPin].No).Explain;
     }
 
     public void SelectSkillPull(){

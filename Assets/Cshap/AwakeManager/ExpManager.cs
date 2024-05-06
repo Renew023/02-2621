@@ -13,10 +13,16 @@ public class ExpManager : MonoBehaviour
     //{10, 20, 32, 64, 100, 200, 320, 640, 1000};
     public int CurExp = 0, MaxExp = 5, MinExp = 0;
     public int PassiveStat, Level = 1;
+    public List<string> RewardName;
+
+    public int SaveExp;
 
     // Start is called before the first frame update
     void Start()
     {
+        Setting();
+        LevelReward();
+
         instance = this;
         for(int i=1; i<=30; i++){
             EXP.Add(Expin);
@@ -29,17 +35,52 @@ public class ExpManager : MonoBehaviour
             }
         }
     }
+
+    public void Setting()
+    {
+        RewardName.Add("[패시브] 대장의 품격");
+        RewardName.Add("[패시브] 쇄약");
+    }
+
+    public void LevelReward(){
+        PlayerSettingData.instance.PassiveSuchi += 5;
+        switch(Level-1)
+        {
+            case 1:
+                Debug.Log(RewardName[0] + "을 습득하셨습니다.");
+                PlayerSettingData.instance.MainPassive.Add(DataBase.instance.Passive[0]);
+
+            break;
+
+            case 2:
+                Debug.Log(RewardName[1] + "을 습득하셨습니다.");
+                PlayerSettingData.instance.MainPassive.Add(DataBase.instance.Passive[1]);
+
+            break;
+            case 3:
+
+            break;
+        }
+    }
     
     public void ExpUp(int Value){
         CurExp += Value;
     }
 
     public void ReLoad(){
-        if(MaxExp < CurExp){
+        if(MaxExp <= CurExp){
             Level += 1;
             MinExp = MaxExp;
             MaxExp = MaxExp + EXP[Level-1];
+            LevelReward();
         }
+    }
+    
+    public void ClearExp()
+    {
+        Debug.Log("몬스터 처치 수 : " + Monster + "\t" + Monster*3 + "\n");
+        Debug.Log("진행한 턴 수 : " + Turn + "\t" + Turn*2 + "\n");
+        Debug.Log("성장한 능력치 : " + Stat + "\t" + Stat*1 + "\n");
     }
 
     // Update is called once per frame

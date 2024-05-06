@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Slot2 : MonoBehaviour
+public class Slot4 : MonoBehaviour
 {
     private Text Slottext;
     private Button btn;
@@ -18,7 +18,7 @@ public class Slot2 : MonoBehaviour
         gameObject.SetActive(true);
         btn = GetComponent<Button>();
         Slottext = gameObject.transform.GetChild(0).GetComponent<Text>();
-        SlotNum = gameObject.transform.GetSiblingIndex();
+        SlotNum = gameObject.transform.GetSiblingIndex()-1;
         Debug.Log(SlotNum);
         returnSlot();
     }
@@ -42,11 +42,11 @@ public class Slot2 : MonoBehaviour
         */
         Inventory.instance.CheckType = SlotType;
         Inventory.instance.CheckNum = SlotNum;
-        Interface.instance.Reload();
+        Interface3.instance.Reload();
     }
 
     public void returnSlot(){
-        Debug.Log(DataBase.instance.CurName);
+        /*Debug.Log(DataBase.instance.CurName);
         ItemCount = DataBase.instance.Item.Count;
         PassiveCount = DataBase.instance.Passive.Count;
         UMulCount = DataBase.instance.UMul.Count;
@@ -79,11 +79,11 @@ public class Slot2 : MonoBehaviour
                     Slottext.text = SlotType + DataBase.instance.Item[SlotNum].Name;
                 }
                 break;
-            case "MainPassive":
-                SlotType = "Passive";
+            case "MainPassive":*/
+                SlotType = "Item";
                 PassiveCount = DataBase.instance.Passive.Count;
-                Slottext.text = SlotType + DataBase.instance.Passive[SlotNum].Name;
-            break;
+                Slottext.text = SlotType + PlayerSettingData.instance.PlayerItem[SlotNum].Name;
+            
         }   
         
         /*ItemCount = PlayerSettingData.instance.PlayerItem.Count;
@@ -111,7 +111,7 @@ public class Slot2 : MonoBehaviour
             SlotType = "Item";
             Slottext.text = SlotType + PlayerSettingData.instance.PlayerItem[SlotNum].Name;
         }*/
-    }
+    
 
     // Update is called once per frame
     void Update()

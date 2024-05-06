@@ -24,12 +24,11 @@ public class PlayerSettingData : MonoBehaviour
     public Status Player; // 1. 능력치
 
     public List<Item> PlayerItem; 
+
     public List<Item> Selection;
     public List<Skill> PlayerPassive; // 2. 인벤토리 인 게임.
     public int PassiveSuchi;
-
     public List<Skill> PlayerUMul;
-
     public List<Skill> PlayerSkill; // 3. 스킬(액티브)
 
 
@@ -41,6 +40,19 @@ public class PlayerSettingData : MonoBehaviour
 
     public List<Skill> Playerskill; //최대 4개까지 얻을 수 있고 그 이후에 스킬 습득 시 기존 것을 삭제함. 
 
+    public void EquipItem()
+    {
+        Player.HP += PlayerItem[Inventory.instance.CheckNum].HP;
+        Player.ATK += PlayerItem[Inventory.instance.CheckNum].ATK;
+        Player.DEX += PlayerItem[Inventory.instance.CheckNum].DEX;
+        Player.SPD += PlayerItem[Inventory.instance.CheckNum].SPEED;
+        PlayerInfo.instance.ReLoad();
+
+        PlayerItem.RemoveAt(Inventory.instance.CheckNum);
+        PlayerSlot3.instance.ItemLoad();
+
+        Interface3.instance.SetDis();
+    }
     /*public void GetSkill(){
         if(Skill.Count >= 4)
         {

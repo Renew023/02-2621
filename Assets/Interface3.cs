@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Interface : MonoBehaviour
+public class Interface3 : MonoBehaviour
 {
+    public static Interface3 instance;
+
     public List<Text> Infotext;
     public Text Infortant;
     public int EffectNumber = 0;
-    public static Interface instance;
     public GameObject ButtonUp;
     public int CurSlot;
     // Start is called before the first frame update
@@ -31,7 +32,7 @@ public class Interface : MonoBehaviour
 
     public void AddPage(int num){
         EffectNumber += num;
-        if(EffectNumber >= DataBase.instance.Item[Inventory.instance.CheckNum].Effect.Length)
+        if(EffectNumber >= PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].Effect.Length)
         {
             EffectNumber = 0;
         }
@@ -40,7 +41,7 @@ public class Interface : MonoBehaviour
 
     public void Screen(){
         ButtonUp.SetActive(true);
-        Infortant.text = "" + DataBase.instance.Item[Inventory.instance.CheckNum].Effect[EffectNumber] + " : " + DataBase.instance.EffectArray.Find(x => x.Name == DataBase.instance.Item[Inventory.instance.CheckNum].Effect[EffectNumber]).EffectExplain;
+        Infortant.text = "" + PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].Effect[EffectNumber] + " : " + DataBase.instance.EffectArray.Find(x => x.Name == PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].Effect[EffectNumber]).EffectExplain;
     }
 
     public void Reload(){
@@ -55,31 +56,31 @@ public class Interface : MonoBehaviour
 
 
             case "Passive" :
-                Infotext[0].text = DataBase.instance.Passive[Inventory.instance.CheckNum].Name;
-                Infotext[1].text = DataBase.instance.Passive[Inventory.instance.CheckNum].Explain;
+                Infotext[0].text = PlayerSettingData.instance.PlayerPassive[Inventory.instance.CheckNum].Name;
+                Infotext[1].text = PlayerSettingData.instance.PlayerPassive[Inventory.instance.CheckNum].Explain;
                 SetAct(2);
                 break;
 
 
             case "Item" : 
                 EffectNumber = 0;
-                Infotext[0].text = "" + DataBase.instance.Item[Inventory.instance.CheckNum].Name;
-                Infotext[1].text = "" + DataBase.instance.Item[Inventory.instance.CheckNum].Explain;
-                Infotext[2].text = "HP : " + DataBase.instance.Item[Inventory.instance.CheckNum].HP;
-                Infotext[3].text = "ATK : " + DataBase.instance.Item[Inventory.instance.CheckNum].ATK;
-                Infotext[4].text = "DEX : " + DataBase.instance.Item[Inventory.instance.CheckNum].DEX;
-                Infotext[5].text = "SPEED : " + DataBase.instance.Item[Inventory.instance.CheckNum].SPEED;
+                Infotext[0].text = "" + PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].Name;
+                Infotext[1].text = "" + PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].Explain;
+                Infotext[2].text = "HP : " + PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].HP;
+                Infotext[3].text = "ATK : " + PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].ATK;
+                Infotext[4].text = "DEX : " + PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].DEX;
+                Infotext[5].text = "SPEED : " + PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].SPEED;
                 Infotext[6].text = "효과 : ";
                 Infortant.text = "";
-                for(int i = 0; i< DataBase.instance.Item[Inventory.instance.CheckNum].Effect.Length; i++)
+                for(int i = 0; i< PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].Effect.Length; i++)
                 {
-                    Infotext[6].text += "" + DataBase.instance.Item[Inventory.instance.CheckNum].Effect[i];
-                    if(i+1 < DataBase.instance.Item[Inventory.instance.CheckNum].Effect.Length){
+                    Infotext[6].text += "" + PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].Effect[i];
+                    if(i+1 < PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].Effect.Length){
                         Infotext[6].text += ", ";
                     }
                 }
 
-                Infotext[7].text = "" + DataBase.instance.Item[Inventory.instance.CheckNum].Type;
+                Infotext[7].text = "" + PlayerSettingData.instance.PlayerItem[Inventory.instance.CheckNum].Type;
                 Screen();
                 SetAct(8);
                 break;
@@ -98,7 +99,12 @@ public class Interface : MonoBehaviour
             Infotext[j].gameObject.SetActive(false);
         }
     }
+    public void OnEnable(){
+        Debug.Log("켜짐");
+    }
+
     public void OnDisable(){
+        Debug.Log("꺼짐");
         SetDis();
     }
 

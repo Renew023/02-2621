@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Interface : MonoBehaviour
+public class Interface2 : MonoBehaviour
 {
     public List<Text> Infotext;
     public Text Infortant;
     public int EffectNumber = 0;
-    public static Interface instance;
+    public static Interface2 instance;
     public GameObject ButtonUp;
     public int CurSlot;
     // Start is called before the first frame update
@@ -55,8 +55,8 @@ public class Interface : MonoBehaviour
 
 
             case "Passive" :
-                Infotext[0].text = DataBase.instance.Passive[Inventory.instance.CheckNum].Name;
-                Infotext[1].text = DataBase.instance.Passive[Inventory.instance.CheckNum].Explain;
+                Infotext[0].text = PlayerSettingData.instance.PlayerPassive[Inventory.instance.CheckNum].Name;
+                Infotext[1].text = PlayerSettingData.instance.PlayerPassive[Inventory.instance.CheckNum].Explain;
                 SetAct(2);
                 break;
 
@@ -98,7 +98,12 @@ public class Interface : MonoBehaviour
             Infotext[j].gameObject.SetActive(false);
         }
     }
+    public void OnEnable(){
+        Debug.Log("켜짐");
+    }
+
     public void OnDisable(){
+        Debug.Log("꺼짐");
         SetDis();
     }
 

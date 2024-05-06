@@ -12,6 +12,7 @@ public class Inventory : MonoBehaviour
     public List<GameObject> Slot;
     public int CheckNum;
     public string CheckType;
+    public GameObject SelectButton;
 
     public int InvLength;
 
@@ -24,6 +25,8 @@ public class Inventory : MonoBehaviour
     public List<Skill> AllPassive, MyPassive, CurPassive, GamePassive, GameCurPassive;
     public List<Skill> AllUMul, MyUMul, CurUMul, GameUMul, GameCurUMul;
 
+    public Text ClickName;
+
     public string CurName;
     public int AllPage, CurPage = 1;
     public int Item, Passive, UMul;
@@ -33,18 +36,23 @@ public class Inventory : MonoBehaviour
     void Awake()
     {
         instance = this;
-        EmptyText.Add(gameObject.transform.GetChild(5).GetComponent<Text>()); //Page 수 표기
+        EmptyText.Add(gameObject.transform.GetChild(6).GetComponent<Text>()); //Page 수 표기
+        ClickName = gameObject.transform.GetChild(3).GetComponent<Text>();
+        SelectButton = gameObject.transform.GetChild(9).gameObject;
     }
 
     public void SelectBag(string Name){
             DataBase.instance.CurPage = 1;
             DataBase.instance.AllPage = 1;
-
+            ClickName.text = "" + Name;
+            SelectButton.SetActive(true);
+            
         switch(Name){
 
-            case "Dogam": 
+            case "도감": 
                 DataBase.instance.CurName = "Dogam";
                 DataBase.instance.SlotAll = DataBase.instance.Item.Count + DataBase.instance.Passive.Count + DataBase.instance.UMul.Count;
+                SelectButton.SetActive(false);
                 for(int i=6; i<DataBase.instance.SlotAll; i+=6)
                 {
                     DataBase.instance.AllPage += 1;
@@ -54,9 +62,9 @@ public class Inventory : MonoBehaviour
                 Debug.Log(DataBase.instance.AllPage);
                 break;
 
-            case "MainUMul":
+            case "유물":
                 DataBase.instance.CurName = "UMul";
-                DataBase.instance.SlotAll = DataBase.instance.UMul.Count;
+                DataBase.instance.SlotAll = PlayerSettingData.instance.MainUMul.Count;
                 for(int i=6; i<=DataBase.instance.SlotAll; i+=6)
                 {
                     DataBase.instance.AllPage += 1;
@@ -65,7 +73,7 @@ public class Inventory : MonoBehaviour
                 Debug.Log(DataBase.instance.AllPage);
                 break;
             
-            case "MainPassive":
+            case "특성":
                 DataBase.instance.CurName = "MainPassive";
                 DataBase.instance.SlotAll = PlayerSettingData.instance.MainPassive.Count;
                 for(int i=6; i<=DataBase.instance.SlotAll; i+=6)
@@ -161,30 +169,33 @@ public class Inventory : MonoBehaviour
     }
 
     public void SelectPassive(){
-        for(int i=PlayerSettingData.instance.PlayerPassive.Count; i>0; i--)
+        for(int i=PlayerSettingData.instance.PlayerPassive.Count; i>0; i--) //내 패시브 개수가 존재한다면
         {
-            if(PlayerSettingData.instance.PlayerPassive[i-1].Name == PlayerSettingData.instance.MainPassive[CheckNum].Name)
+            if(PlayerSettingData.instance.PlayerPassive[i-1].Name == PlayerSettingData.instance.MainPassive[CheckNum].Name) //패시브가 만약 이름이 동일하다면 제외한다. 다시 얻는다.
             {
                 PlayerSettingData.instance.PassiveSuchi -= PlayerSettingData.instance.MainPassive[CheckNum].SkillRare;
                 PlayerSettingData.instance.PlayerPassive.RemoveAt(i-1);
-                Slot[CheckNum].SetActive(true);
+                //Slot[CheckNum].SetActive(true); //활성화 보이게 한다.
+                Slot[CheckNum].GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+                PlayerSlot.instance.PassiveLoad();
                 return;
             }
-
         }
         
         if(PlayerSettingData.instance.PassiveSuchi + PlayerSettingData.instance.MainPassive[CheckNum].SkillRare >= 0)
         {
             PlayerSettingData.instance.PassiveSuchi += PlayerSettingData.instance.MainPassive[CheckNum].SkillRare;
             PlayerSettingData.instance.PlayerPassive.Add(PlayerSettingData.instance.MainPassive[CheckNum]);
-            Slot[CheckNum].SetActive(false);
+            //Slot[CheckNum].SetActive(false);
+            Slot[CheckNum].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1f);
         }
             
         else
             Debug.Log("패시브 수련치를 맞춰주세요");
-        Playerpassive.instance.Reload();
-        PlayerSlot.instance.PassiveLoad();
-        PlayerSlot.instance.UMulLoad();
+            //Playerpassive.instance.Reload();
+            PlayerSlot.instance.PassiveLoad();
+            //PlayerSlot.instance.UMulLoad();
+
     }
 
     public void Deleteinventory(){

@@ -93,6 +93,7 @@ public class DataBase : MonoBehaviour
         MapTileArray.Add(new MapTile("2", "몬스터", "고블린", "흉악하다", "Easy", "Item", 2));
         MapTileArray.Add(new MapTile("3", "몬스터", "오크", "귀엽다", "Easy", "DEX", 3));
         MapTileArray.Add(new MapTile("4", "몬스터", "박쥐", "날쌔다", "Easy", "SPD", 5));
+        MapTileArray.Add(new MapTile("5", "이벤트", "짜장면", "세계에서 제일 맛있는 짜장면입니다. 한 입 먹어볼래요?", "Easy", "SPD", 5));
         
         /*MapTileArray.Add(new MapTile("2", "보스", "Hard"));
         MapTileArray.Add(new MapTile("3", "휴식", "Hard"));
@@ -109,6 +110,8 @@ public class DataBase : MonoBehaviour
         MapTileArrayYes.Add(new MapTile("2", "몬스터", "고블린", "흉악하다", "Easy", "ATK", 2));
         MapTileArrayYes.Add(new MapTile("3", "몬스터", "오크", "흉악하다", "Easy", "ATK", 2));
         MapTileArrayYes.Add(new MapTile("4", "몬스터", "박쥐", "흉악하다", "Easy", "ATK", 2));
+        MapTileArrayYes.Add(new MapTile("5", "이벤트", "맛있겠쥐?", "맛있네", "Easy", "ATK", 2));
+        MapTileArrayYes.Add(new MapTile("5", "이벤트", "맛없겠쥐?", "맛없네", "Easy", "ATK", 2));
     }
 
     public void RewardListSum(){

@@ -25,7 +25,7 @@ public class MapGrid : MonoBehaviour
 
     void MapBuild(){
 
-        for(int Map = 0; Map < 12; Map++){
+        for(int Map = 0; Map < 999; Map++){
             Random_int = Random.Range(0, DataBase.instance.MapTileArray.Count);
             Debug.Log(Random_int);
             PlayerSettingData.instance.Mapline.Add(DataBase.instance.MapTileArray[Random_int]); // Map 가져오기

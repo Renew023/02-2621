@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerSlot : MonoBehaviour
+public class PlayerSlot2 : MonoBehaviour
 {
-    public static PlayerSlot instance;
+    public static PlayerSlot2 instance;
 
     public GameObject Skill_Prefabs;
     public GameObject UMul_Prefabs;
