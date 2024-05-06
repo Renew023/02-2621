@@ -24,7 +24,7 @@ public class ChoiceRoot : MonoBehaviour
         playerhp = GameObject.Find("InGamePlayerHP").GetComponent<PlayerHP>();
         monsterhp = GameObject.Find("InGameMonsterHP").GetComponent<MonsterHP>();
         //playerstat = GameObject.Find("InGamePlayerStatus").GetComponent<PlayerInfo>(); 
-        End = GameObject.Find("InGamecanvas").transform.GetChild(7).GetComponent<Ending>();
+        End = GameObject.Find("InGamecanvas").transform.GetChild(8).GetComponent<Ending>();
     }
 
     public void CheckMapline(){ //string _No, string _TileName, string _TileTitle, string _Explain, string _MapInfo, string _RewardType, int _Num
@@ -32,6 +32,7 @@ public class ChoiceRoot : MonoBehaviour
         {
             TextList.instance.result = 1;
             PlayerSettingData.instance.PlayerPin++;
+            TextList.instance.PlayerTurn.text = "" + PlayerSettingData.instance.PlayerPin;
             return;
         }
         TextList.instance.check = choice;
@@ -43,7 +44,12 @@ public class ChoiceRoot : MonoBehaviour
 
             case "보스": 
             Debug.Log("1입니당");
-            EventChoiceSelect();
+            switch(TextList.instance.MonsterState){
+                    
+                case "몬스터" : Battle(); break;
+                case "리워드" : RewardSelect(); break;
+                case "스킬변경" : SkillChange(); break;
+                }
             break;
 
             case "휴식": 
@@ -223,6 +229,7 @@ public class ChoiceRoot : MonoBehaviour
         RootEnd();
         TextList.instance.MidText.text = "";
         PlayerSettingData.instance.PlayerPin++;
+        TextList.instance.PlayerTurn.text = "" + PlayerSettingData.instance.PlayerPin;
     }
     public void TurnEnd(){
         for(int i=0; i< TextList.instance.MonsterEffect.Count; i++){ //몬스터에게 걸려있는 디버프 및 버프 개수.

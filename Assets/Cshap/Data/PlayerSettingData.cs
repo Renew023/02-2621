@@ -28,7 +28,9 @@ public class PlayerSettingData : MonoBehaviour
     public List<Item> Selection;
     public List<Skill> PlayerPassive; // 2. 인벤토리 인 게임.
     public int PassiveSuchi;
+
     public List<Skill> PlayerUMul;
+
     public List<Skill> PlayerSkill; // 3. 스킬(액티브)
 
 

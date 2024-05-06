@@ -32,6 +32,7 @@ public class TextList : MonoBehaviour
     public List<string> RewardType;
     public int result;
     public int check;
+    public Text PlayerTurn;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,8 @@ public class TextList : MonoBehaviour
     void init(){
         QuestTitle = gameObject.transform.GetChild(5).GetComponent<Text>();
         MidText = gameObject.transform.GetChild(4).transform.GetChild(0).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>();
+        PlayerTurn = gameObject.transform.GetChild(6).GetComponent<Text>();
+
         for(int i=0; i<4; i++){
             ChoiceButton.Add(gameObject.transform.GetChild(i).gameObject);
             ChoiceButton[i].GetComponent<ChoiceRoot>().choice = i;
@@ -84,7 +87,7 @@ public class TextList : MonoBehaviour
             ChoiceButton[0].SetActive(true);
             ChoiceButtonText[0].text = "완료";
             TextBox = DataBase.instance.MapTileArrayYes.FindAll(x => x.No == PlayerSettingData.instance.Mapline[PlayerSettingData.instance.PlayerPin].No);
-            MidText.text = TextBox[check].Explain;
+            MidText.text = TextBox[0].Explain;
             return;
         }
         
@@ -95,6 +98,31 @@ public class TextList : MonoBehaviour
 
             case "보스": 
             Debug.Log("1입니당");
+                monster = DataBase.instance.Monster.Find(x => x.Name == PlayerSettingData.instance.Mapline[PlayerSettingData.instance.PlayerPin].TileTitle);
+
+                if(MonsterState == ""){
+                    QuestTitle.text = PlayerSettingData.instance.Mapline[PlayerSettingData.instance.PlayerPin].TileTitle;
+                    MidText.text = monster.Name + " 이 출현했다. 몬스터의 체력 : "+ monster.HP + "\n\n";
+                    Monster_HP = monster.HP;
+                    monsterhp.Init();
+                }
+                if(Monster_HP > 0)
+                {
+                    monsterhp.SetAct(true);
+                    Monster();
+                    MonsterState = "몬스터";
+                }
+                else if(MonsterState == "스킬변경")
+                {
+                    SelectSkillPull();
+                }
+                else
+                {
+                    MidText.text = "처치되었습니다.";
+                    monsterhp.SetAct(false);
+                    Reward();
+                    MonsterState = "리워드";
+                }
             break;
 
             case "휴식": 
@@ -135,7 +163,7 @@ public class TextList : MonoBehaviour
             break;
 
             case "이벤트": 
-            Debug.Log("5입니당");
+                Event();
             break;
 
             case "상점": 

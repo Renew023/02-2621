@@ -55,11 +55,13 @@ public class DataBase : MonoBehaviour
         Monster.Add(new Monster2("0", "고블린", 100, 5, 0, 2, 20, 1, "버섯집"));
         Monster.Add(new Monster2("1", "오크", 200, 10, 1, 5, 12, 1, "버섯집"));
         Monster.Add(new Monster2("2", "박쥐", 30, 10, 0 , 3, 60, 1, "버섯집"));
+        Monster.Add(new Monster2("3", "드레이크", 3000, 10, 0 , 3, 60, 1, "버섯집"));
+        Monster.Add(new Monster2("4", "양아취", 1000, 100, 0 , 10, 20, 1, "버섯집"));
         MonsterImage.AddRange(Resources.LoadAll<Image>("Monster"));
         }
 
     public void HeroList(){ //string _No, string _Name, int _HP, int _ATK, int _DEX, int _EXP, int _SPD, int _Level
-        Hero.Add(new Hero("0", "청소부", 100, 10, 10, 0, 10, 1, "청소를 좋아하는 청소부. 그의 청소능력은 몬스터에게도 통한다.", new string[] {"강렬한 일격", "독바른 쌍연격"}, new string[]{"대장의 품격"}));
+        Hero.Add(new Hero("0", "청소부", 10000, 10, 10, 0, 10, 1, "청소를 좋아하는 청소부. 그의 청소능력은 몬스터에게도 통한다.", new string[] {"강렬한 일격", "독바른 쌍연격"}, new string[]{"대장의 품격"}));
         Hero.Add(new Hero("1", "게이머", 50, 10, 5, 0, 50, 1, "프로게이머로 체력은 낮지만 빠른 반응속도를 자랑한다.", new string[] {"강렬한 일격", "독바른 쌍연격"}, new string[]{}));
         Hero.Add(new Hero("2", "농부", 200, 30, 30, 0, 10, 1, "농사로 단련된 농부. 허나 관절이 좋지 않아 몸이 다소 느리다.", new string[] {"강렬한 일격", "독바른 쌍연격"}, new string[]{}));
         MonsterImage.AddRange(Resources.LoadAll<Image>("Hero"));
@@ -88,12 +90,14 @@ public class DataBase : MonoBehaviour
     }
 
     public void MapTileList(){
-        MapTileArray.Add(new MapTile("0", "함정", "압정 지뢰", "길거리에 압정이 깔려있습니다.", "Hard", "", 0));
-        MapTileArray.Add(new MapTile("1", "함정", "통나무 기관", "누군가 악의적으로 설치한듯 보이는 통나무 기관이 보입니다.","Hard", "", 0));
-        MapTileArray.Add(new MapTile("2", "몬스터", "고블린", "흉악하다", "Easy", "Item", 2));
-        MapTileArray.Add(new MapTile("3", "몬스터", "오크", "귀엽다", "Easy", "DEX", 3));
-        MapTileArray.Add(new MapTile("4", "몬스터", "박쥐", "날쌔다", "Easy", "SPD", 5));
-        MapTileArray.Add(new MapTile("5", "이벤트", "짜장면", "세계에서 제일 맛있는 짜장면입니다. 한 입 먹어볼래요?", "Easy", "SPD", 5));
+        MapTileArray.Add(new MapTile("0000", "함정", "압정 지뢰", "길거리에 압정이 깔려있습니다.", "Hard", "", 0));
+        MapTileArray.Add(new MapTile("0001", "함정", "통나무 기관", "누군가 악의적으로 설치한듯 보이는 통나무 기관이 보입니다.","Hard", "", 0));
+        MapTileArray.Add(new MapTile("1000", "몬스터", "고블린", "흉악하다", "Easy", "Item", 2));
+        MapTileArray.Add(new MapTile("1001", "몬스터", "오크", "귀엽다", "Easy", "DEX", 3));
+        MapTileArray.Add(new MapTile("1002", "몬스터", "박쥐", "날쌔다", "Easy", "SPD", 5));
+        MapTileArray.Add(new MapTile("1003", "몬스터", "양아취", "씨발럼", "Easy", "SPD", 5));
+        MapTileArray.Add(new MapTile("2000", "이벤트", "짜장면", "세계에서 제일 맛있는 짜장면입니다. 한 입 먹어볼래요?", "Easy", "SPD", 5));
+        MapTileArray.Add(new MapTile("3000", "보스", "드레이크", "가장 강력한 생명체라고 불리우는 드래곤의 아종입니다.", "Hard", "SPD", 10));
         
         /*MapTileArray.Add(new MapTile("2", "보스", "Hard"));
         MapTileArray.Add(new MapTile("3", "휴식", "Hard"));
@@ -103,15 +107,18 @@ public class DataBase : MonoBehaviour
         MapTileArray.Add(new MapTile("7", "상점", "Hard"));*/
     }
     public void MapTileYes(){
-        MapTileArrayYes.Add(new MapTile("0", "함정", "피해 간다", "압정을 피해 안전하게 갔습니다.", "Hard", "", 0));
-        MapTileArrayYes.Add(new MapTile("0", "함정", "밟고 간다", "이런 것도 기연일까요? 압정에 자극을 받아 강해졌습니다", "Hard", "ATK", 1)); //switch로 STR 대신 숫자를 부여하거나 애초에 String 값.
-        MapTileArrayYes.Add(new MapTile("1", "함정", "수련 장소로 이용한다.", "통나무는 그리 안전한 장치가 아니였습니다...", "Hard", "HP", -50));
-        MapTileArrayYes.Add(new MapTile("1", "함정", "통나무를 가져간다.", "통나무는 거대했습니다. 그리고 무거웠죠", "Hard", "HP", -30));
-        MapTileArrayYes.Add(new MapTile("2", "몬스터", "고블린", "흉악하다", "Easy", "ATK", 2));
-        MapTileArrayYes.Add(new MapTile("3", "몬스터", "오크", "흉악하다", "Easy", "ATK", 2));
-        MapTileArrayYes.Add(new MapTile("4", "몬스터", "박쥐", "흉악하다", "Easy", "ATK", 2));
-        MapTileArrayYes.Add(new MapTile("5", "이벤트", "맛있겠쥐?", "맛있네", "Easy", "ATK", 2));
-        MapTileArrayYes.Add(new MapTile("5", "이벤트", "맛없겠쥐?", "맛없네", "Easy", "ATK", 2));
+        MapTileArrayYes.Add(new MapTile("0000", "함정", "피해 간다", "압정을 피해 안전하게 갔습니다.", "Hard", "", 0));
+        MapTileArrayYes.Add(new MapTile("0000", "함정", "밟고 간다", "이런 것도 기연일까요? 압정에 자극을 받아 강해졌습니다", "Hard", "ATK", 1)); //switch로 STR 대신 숫자를 부여하거나 애초에 String 값.
+        MapTileArrayYes.Add(new MapTile("0001", "함정", "수련 장소로 이용한다.", "통나무는 그리 안전한 장치가 아니였습니다...", "Hard", "HP", -50));
+        MapTileArrayYes.Add(new MapTile("0001", "함정", "통나무를 가져간다.", "통나무는 거대했습니다. 그리고 무거웠죠", "Hard", "HP", -30));
+        MapTileArrayYes.Add(new MapTile("1000", "몬스터", "고블린", "흉악하다", "Easy", "ATK", 2));
+        MapTileArrayYes.Add(new MapTile("1001", "몬스터", "오크", "흉악하다", "Easy", "ATK", 2));
+        MapTileArrayYes.Add(new MapTile("1002", "몬스터", "박쥐", "흉악하다", "Easy", "ATK", 2));
+        MapTileArrayYes.Add(new MapTile("1003", "몬스터", "양아취", "흉악하다", "Easy", "ATK", 2));
+
+        MapTileArrayYes.Add(new MapTile("2000", "이벤트", "맛있겠쥐?", "맛있네", "Easy", "ATK", 2));
+        MapTileArrayYes.Add(new MapTile("2000", "이벤트", "맛없겠쥐?", "맛없네", "Easy", "ATK", 2));
+        MapTileArrayYes.Add(new MapTile("3000", "보스", "드레이크", "강한 상대였지만 맛있었습니다.", "Hard", "SPD", 10));
     }
 
     public void RewardListSum(){

@@ -76,12 +76,12 @@ public class ExpManager : MonoBehaviour
         }
     }
     
-    public void ClearExp()
-    {
-        Debug.Log("몬스터 처치 수 : " + Monster + "\t" + Monster*3 + "\n");
-        Debug.Log("진행한 턴 수 : " + Turn + "\t" + Turn*2 + "\n");
-        Debug.Log("성장한 능력치 : " + Stat + "\t" + Stat*1 + "\n");
-    }
+    // public void ClearExp()
+    // {
+    //     Debug.Log("몬스터 처치 수 : " + Monster + "\t" + Monster*3 + "\n");
+    //     Debug.Log("진행한 턴 수 : " + Turn + "\t" + Turn*2 + "\n");
+    //     Debug.Log("성장한 능력치 : " + Stat + "\t" + Stat*1 + "\n");
+    // }
 
     // Update is called once per frame
     void Update()

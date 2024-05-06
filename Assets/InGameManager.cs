@@ -7,8 +7,7 @@ public class InGameManager : MonoBehaviour
     public static InGameManager instance;
 
     public int MonsterATK, MonsterKill;
-    //public int Turn;
-
+    public int Turn;
     public List<Item> Item; //Clear
     //public List<> UMul; // Clear
     //public int Passive;

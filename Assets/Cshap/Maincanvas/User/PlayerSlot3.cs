@@ -18,11 +18,13 @@ public class PlayerSlot3 : MonoBehaviour
     // public List<Text> PlayerUMulT;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
+
         Skill_Prefabs = Resources.Load<GameObject>("Prefabs/Slot4");
-        ItemLoad();
+        
+        // ItemLoad();
         // PassiveLoad();
         // UMulLoad();
     }
