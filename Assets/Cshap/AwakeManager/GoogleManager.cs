@@ -7,6 +7,7 @@ using GooglePlayGames.BasicApi;
 
 public class GoogleManager : MonoBehaviour
 {
+    public Text Sibal;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +21,13 @@ public class GoogleManager : MonoBehaviour
     {
         if (status == SignInStatus.Success)
         {
-            Debug.Log("Success");
+            Sibal.text = "Success";
             InitManager.instance.TouchLogin.SetActive(false);
             InitManager.instance.Maincanvas.SetActive(true);
         }
         else
         {
-            Debug.Log("Failed");
+            Sibal.text = "Failed";
             InitManager.instance.TouchLogin.gameObject.SetActive(false);
             InitManager.instance.Maincanvas.SetActive(true);
         }

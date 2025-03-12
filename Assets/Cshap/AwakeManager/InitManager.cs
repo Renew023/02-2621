@@ -85,6 +85,7 @@ public class InitManager : MonoBehaviour
         DataBase.instance.MapTileNo();
         DataBase.instance.RewardListSum();
         DataBase.instance.PassiveList();
+        DataBase.instance.UMulList();
     }
 
     public void Init(){ //최상위층 부모들

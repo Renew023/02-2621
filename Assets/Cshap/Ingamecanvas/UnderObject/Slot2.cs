@@ -84,6 +84,12 @@ public class Slot2 : MonoBehaviour
                 PassiveCount = DataBase.instance.Passive.Count;
                 Slottext.text = SlotType + DataBase.instance.Passive[SlotNum].Name;
             break;
+
+            case "UMul":
+                SlotType = "UMul";
+                UMulCount = DataBase.instance.UMul.Count;
+                Slottext.text = SlotType + DataBase.instance.UMul[SlotNum].Name;
+            break;
         }   
         
         /*ItemCount = PlayerSettingData.instance.PlayerItem.Count;

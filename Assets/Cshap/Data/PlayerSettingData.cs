@@ -51,7 +51,7 @@ public class PlayerSettingData : MonoBehaviour
         PlayerInfo.instance.ReLoad();
 
         PlayerItem.RemoveAt(Inventory.instance.CheckNum);
-        PlayerSlot3.instance.ItemLoad();
+        ItemSlot.instance.ItemLoad();
 
         Interface3.instance.SetDis();
     }

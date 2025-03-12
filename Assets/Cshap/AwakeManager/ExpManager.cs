@@ -14,6 +14,7 @@ public class ExpManager : MonoBehaviour
     public int CurExp = 0, MaxExp = 5, MinExp = 0;
     public int PassiveStat, Level = 1;
     public List<string> RewardName;
+    public List<string> RewardUMul;
 
     public int SaveExp;
 
@@ -40,6 +41,9 @@ public class ExpManager : MonoBehaviour
     {
         RewardName.Add("[패시브] 대장의 품격");
         RewardName.Add("[패시브] 쇄약");
+
+        RewardUMul.Add("[유물] 몰락한 왕관");
+        RewardUMul.Add("[유물] 푹 익은 벼이삭");
     }
 
     public void LevelReward(){
@@ -50,11 +54,17 @@ public class ExpManager : MonoBehaviour
                 Debug.Log(RewardName[0] + "을 습득하셨습니다.");
                 PlayerSettingData.instance.MainPassive.Add(DataBase.instance.Passive[0]);
 
+                Debug.Log(RewardUMul[0] + "을 습득하셨습니다.");
+                PlayerSettingData.instance.MainUMul.Add(DataBase.instance.UMul[0]);
+
             break;
 
             case 2:
                 Debug.Log(RewardName[1] + "을 습득하셨습니다.");
                 PlayerSettingData.instance.MainPassive.Add(DataBase.instance.Passive[1]);
+
+                Debug.Log(RewardUMul[1] + "을 습득하셨습니다.");
+                PlayerSettingData.instance.MainUMul.Add(DataBase.instance.UMul[1]);
 
             break;
             case 3:

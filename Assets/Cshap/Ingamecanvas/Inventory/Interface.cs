@@ -29,14 +29,14 @@ public class Interface : MonoBehaviour
         SetDis();
     }
 
-    public void AddPage(int num){
-        EffectNumber += num;
-        if(EffectNumber >= DataBase.instance.Item[Inventory.instance.CheckNum].Effect.Length)
-        {
-            EffectNumber = 0;
-        }
-        Screen();
-    }
+    //public void AddPage(int num){
+    //    EffectNumber += num;
+    //    if(EffectNumber >= DataBase.instance.Item[Inventory.instance.CheckNum].Effect.Length)
+    //    {
+    //        EffectNumber = 0;
+    //    }
+    //    Screen();
+    //}
 
     public void Screen(){
         ButtonUp.SetActive(true);

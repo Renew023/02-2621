@@ -18,8 +18,6 @@ public class ChoiceRoot : MonoBehaviour
 
     public int Stat;
 
-    
-
     void Start(){
         playerhp = GameObject.Find("InGamePlayerHP").GetComponent<PlayerHP>();
         monsterhp = GameObject.Find("InGameMonsterHP").GetComponent<MonsterHP>();

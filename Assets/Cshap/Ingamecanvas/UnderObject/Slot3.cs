@@ -50,41 +50,20 @@ public class Slot3 : MonoBehaviour
         ItemCount = DataBase.instance.Item.Count;
         PassiveCount = DataBase.instance.Passive.Count;
         UMulCount = DataBase.instance.UMul.Count;
-
+*/
         switch(DataBase.instance.CurName){
-            case "Dogam" :
-                ItemCount = DataBase.instance.Item.Count;
-                PassiveCount = DataBase.instance.Passive.Count;
-                UMulCount = DataBase.instance.UMul.Count;
-
-                Debug.Log("Return SLot");
-                if(SlotNum >= ItemCount)//7
-                {
-                    SlotNum -= ItemCount;
-                    if(SlotNum >= PassiveCount)//7 + 8
-                    {
-                        SlotNum -= PassiveCount;
-                        SlotType = "UMul";
-                        Slottext.text = SlotType + DataBase.instance.UMul[SlotNum].Name;
-                    }
-                    else
-                    {
-                        SlotType = "Passive";
-                        Slottext.text = SlotType + DataBase.instance.Passive[SlotNum].Name;
-                    }
-                }
-                else
-                {
-                    SlotType = "Item";
-                    Slottext.text = SlotType + DataBase.instance.Item[SlotNum].Name;
-                }
-                break;
-            case "MainPassive":*/
+            case "MainPassive":
                 SlotType = "Passive";
-                PassiveCount = DataBase.instance.Passive.Count;
                 Slottext.text = SlotType + PlayerSettingData.instance.PlayerPassive[SlotNum].Name;
-            
-        }   
+            break;
+            case "UMul":
+                SlotType = "UMul";
+                Slottext.text = SlotType + PlayerSettingData.instance.PlayerUMul[SlotNum].Name;
+            break;
+
+        }
+    }
+    
         
         /*ItemCount = PlayerSettingData.instance.PlayerItem.Count;
         PassiveCount = PlayerSettingData.instance.PlayerPassive.Count;

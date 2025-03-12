@@ -8,8 +8,6 @@ public class PlayerInfo : MonoBehaviour
     public static PlayerInfo instance;
 
     //PlayerInfo.instance.player.Hp;
-    public Status player;
-    public int DEX, ATK, SPD;
     //public Text T_DEX, T_ATK, T_SPD;
     public Text PlayerDate;
     /*public void AddStatus(){
@@ -35,10 +33,10 @@ public class PlayerInfo : MonoBehaviour
         PlayerDate.text += PlayerSettingData.instance.Player.ATK + "\n";
         PlayerDate.text += PlayerSettingData.instance.Player.DEX + "\n";
         PlayerDate.text += PlayerSettingData.instance.Player.SPD + "\n";
-
+        PlayerDate.text += "\n";
         for(int i=0; i<PlayerSettingData.instance.PlayerSkill.Count; i++)
         {
-            PlayerDate.text += PlayerSettingData.instance.PlayerSkill[i].Name;
+            PlayerDate.text += PlayerSettingData.instance.PlayerSkill[i].Name + "\n";
         }
     
     }

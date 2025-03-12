@@ -125,6 +125,10 @@ public class DataBase : MonoBehaviour
         RewardList = Item.Count + Skill.Count + Passive.Count;
 
     }
+    public void UMulList(){//string _No, string _Name, int _Damage, int _shield, string _Explain, string _STAT, int _hitNumber, string _Effect, int _EffectPer, string _SkillType, int _Turn
+        UMul.Add(new Skill("0", "몰락한 왕관", 120, 90, "방어력을 10% 낮추고 공격력을 20% 상승시킵니다", "", 0, "", 0, 0, "UMul", 0, 4));
+        UMul.Add(new Skill("1", "푹 익은 벼이삭", 0, 0, "3턴마다 체력을 10% 회복합니다.", "", 0, "", 0, 0, "UMul", 0, 4));
+    }
 
     public void MapTileNo(){
         //MapTileArrayNo.Add(new MapTile("1", "함정", "밟고 간다", "이런 것도 기연일까요? 압정에 자극을 받아 강해졌습니다", "Hard", "STR", 1));

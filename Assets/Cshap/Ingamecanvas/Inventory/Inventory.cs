@@ -169,32 +169,57 @@ public class Inventory : MonoBehaviour
     }
 
     public void SelectPassive(){
-        for(int i=PlayerSettingData.instance.PlayerPassive.Count; i>0; i--) //내 패시브 개수가 존재한다면
-        {
-            if(PlayerSettingData.instance.PlayerPassive[i-1].Name == PlayerSettingData.instance.MainPassive[CheckNum].Name) //패시브가 만약 이름이 동일하다면 제외한다. 다시 얻는다.
+
+        switch(DataBase.instance.CurName){
+            case "MainPassive" :
+            for(int i=PlayerSettingData.instance.PlayerPassive.Count; i>0; i--) //내 패시브 개수가 존재한다면
             {
-                PlayerSettingData.instance.PassiveSuchi -= PlayerSettingData.instance.MainPassive[CheckNum].SkillRare;
-                PlayerSettingData.instance.PlayerPassive.RemoveAt(i-1);
-                //Slot[CheckNum].SetActive(true); //활성화 보이게 한다.
+                if(PlayerSettingData.instance.PlayerPassive[i-1].Name == PlayerSettingData.instance.MainPassive[CheckNum].Name) //패시브가 만약 이름이 동일하다면 제외한다. 다시 얻는다.
+                {
+                    PlayerSettingData.instance.PassiveSuchi -= PlayerSettingData.instance.MainPassive[CheckNum].SkillRare;
+                    PlayerSettingData.instance.PlayerPassive.RemoveAt(i-1);
+                    //Slot[CheckNum].SetActive(true); //활성화 보이게 한다.
+                    Slot[CheckNum].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1f);
+                    PlayerSlot.instance.PassiveLoad();
+                    return;
+                }
+            }
+            
+            if(PlayerSettingData.instance.PassiveSuchi + PlayerSettingData.instance.MainPassive[CheckNum].SkillRare >= 0)
+            {
+                PlayerSettingData.instance.PassiveSuchi += PlayerSettingData.instance.MainPassive[CheckNum].SkillRare;
+                PlayerSettingData.instance.PlayerPassive.Add(PlayerSettingData.instance.MainPassive[CheckNum]);
+                //Slot[CheckNum].SetActive(false);
                 Slot[CheckNum].GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+            }
+                
+            else
+                Debug.Log("패시브 수련치를 맞춰주세요");
+                //Playerpassive.instance.Reload();
                 PlayerSlot.instance.PassiveLoad();
+                //PlayerSlot.instance.UMulLoad();
+            break;
+
+        case "UMul":
+        for(int i=PlayerSettingData.instance.PlayerUMul.Count; i>0; i--) //내 패시브 개수가 존재한다면
+        {
+            if(PlayerSettingData.instance.PlayerUMul[i-1].Name == PlayerSettingData.instance.MainUMul[CheckNum].Name) //패시브가 만약 이름이 동일하다면 제외한다. 다시 얻는다.
+            {
+                PlayerSettingData.instance.PlayerUMul.RemoveAt(i-1);
+                //Slot[CheckNum].SetActive(true); //활성화 보이게 한다.
+                Slot[CheckNum].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1f);
+                PlayerSlot.instance.UMulLoad();
                 return;
             }
         }
-        
-        if(PlayerSettingData.instance.PassiveSuchi + PlayerSettingData.instance.MainPassive[CheckNum].SkillRare >= 0)
-        {
-            PlayerSettingData.instance.PassiveSuchi += PlayerSettingData.instance.MainPassive[CheckNum].SkillRare;
-            PlayerSettingData.instance.PlayerPassive.Add(PlayerSettingData.instance.MainPassive[CheckNum]);
+            PlayerSettingData.instance.PlayerUMul.Add(PlayerSettingData.instance.MainUMul[CheckNum]);
             //Slot[CheckNum].SetActive(false);
-            Slot[CheckNum].GetComponent<Image>().color = new Color(1.0f, 1.0f, 1.0f, 1f);
+            Slot[CheckNum].GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.5f, 0.5f);
+            PlayerSlot.instance.UMulLoad();
+
+        break;
+
         }
-            
-        else
-            Debug.Log("패시브 수련치를 맞춰주세요");
-            //Playerpassive.instance.Reload();
-            PlayerSlot.instance.PassiveLoad();
-            //PlayerSlot.instance.UMulLoad();
 
     }
 
